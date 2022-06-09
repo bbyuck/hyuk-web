@@ -9,15 +9,25 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+
+
+/*
+  Icon
+*/
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import TableChartIcon from '@mui/icons-material/TableChart';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import BrowserUpdatedIcon from '@mui/icons-material/BrowserUpdated';
+import GridOnIcon from '@mui/icons-material/GridOn';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import ImageIcon from '@mui/icons-material/Image';
 
 /*
   화면 import
@@ -30,8 +40,46 @@ import UpdateFrame from './ui/update/UpdateFrame';
 
 const drawerWidth = 240;
 
-const menuList = ['Create', 'Read', 'Update', 'Delete', 'Grid', 'File Upload', 'Thumbnail'];
-const menuComponentList = [<CreateFrame />, <ReadFrame />, <UpdateFrame />, <DeleteFrame />];
+const menuList = [
+  {
+    name : 'Create',
+    component : <CreateFrame />,
+    icon: <NoteAddIcon />
+  },
+  {
+    name : 'Read',
+    component : <ReadFrame />,
+    icon : <TableChartIcon />
+  },
+  {
+    name : 'Update',
+    component : <UpdateFrame />,
+    icon : <BrowserUpdatedIcon/>
+  },
+  {
+    name : 'Delete',
+    component : <DeleteFrame />,
+    icon : <DeleteForeverIcon />
+  },
+  {
+    name : 'Grid',
+    component : null,
+    icon : <GridOnIcon />
+  },
+  {
+    name : 'File Upload',
+    component : null,
+    icon : <UploadFileIcon />
+  },
+  {
+    name : 'Thumnnail',
+    component : null,
+    icon : <ImageIcon />
+  }
+];
+ 
+// const menuList = ['Create', 'Read', 'Update', 'Delete', 'Grid', 'File Upload', 'Thumbnail'];
+// const menuComponentList = [<CreateFrame />, <ReadFrame />, <UpdateFrame />, <DeleteFrame />];
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -137,15 +185,15 @@ function MainFrame() {
         </DrawerHeader>
         <Divider />
         <List>
-          {menuList.map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {menuList.map((menu, index) => (
+            <ListItem key={index} disablePadding>
               <ListItemButton
                 selected={selectedMenuId === index}
                 onClick={(e) => selectMenu(e, index)}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {menu.icon}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={menu.name} />
               </ListItemButton>
             </ListItem>
           ))}
@@ -154,8 +202,7 @@ function MainFrame() {
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        {menuComponentList[selectedMenuId]}
-        {(selectedMenuId === -1 ? <HomeFrame /> : null)}
+        {(selectedMenuId === -1 ? <HomeFrame /> : menuList[selectedMenuId].component)}
       </Main>
     </Box>
   );
