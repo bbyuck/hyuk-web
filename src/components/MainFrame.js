@@ -42,42 +42,42 @@ const drawerWidth = 240;
 
 const menuList = [
   {
-    name : 'Create',
-    component : <CreateFrame />,
+    name: 'Create',
+    component: <CreateFrame />,
     icon: <NoteAddIcon />
   },
   {
-    name : 'Read',
-    component : <ReadFrame />,
-    icon : <TableChartIcon />
+    name: 'Read',
+    component: <ReadFrame />,
+    icon: <TableChartIcon />
   },
   {
-    name : 'Update',
-    component : <UpdateFrame />,
-    icon : <BrowserUpdatedIcon/>
+    name: 'Update',
+    component: <UpdateFrame />,
+    icon: <BrowserUpdatedIcon />
   },
   {
-    name : 'Delete',
-    component : <DeleteFrame />,
-    icon : <DeleteForeverIcon />
+    name: 'Delete',
+    component: <DeleteFrame />,
+    icon: <DeleteForeverIcon />
   },
   {
-    name : 'Grid',
-    component : null,
-    icon : <GridOnIcon />
+    name: 'Grid',
+    component: null,
+    icon: <GridOnIcon />
   },
   {
-    name : 'File Upload',
-    component : null,
-    icon : <UploadFileIcon />
+    name: 'File Upload',
+    component: null,
+    icon: <UploadFileIcon />
   },
   {
-    name : 'Thumnnail',
-    component : null,
-    icon : <ImageIcon />
+    name: 'Thumnnail',
+    component: null,
+    icon: <ImageIcon />
   }
 ];
- 
+
 // const menuList = ['Create', 'Read', 'Update', 'Delete', 'Grid', 'File Upload', 'Thumbnail'];
 // const menuComponentList = [<CreateFrame />, <ReadFrame />, <UpdateFrame />, <DeleteFrame />];
 
