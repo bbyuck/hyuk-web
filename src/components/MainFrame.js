@@ -19,7 +19,19 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
+/*
+  화면 import
+*/
+import HomeFrame from './ui/HomeFrame';
+import CreateFrame from './ui/create/CreateFrame';
+import DeleteFrame from './ui/delete/DeleteFrame';
+import ReadFrame from './ui/read/ReadFrame';
+import UpdateFrame from './ui/update/UpdateFrame';
+
 const drawerWidth = 240;
+
+const menuList = ['Create', 'Read', 'Update', 'Delete', 'Grid', 'File Upload', 'Thumbnail'];
+const menuComponentList = [<CreateFrame />, <DeleteFrame />, <ReadFrame />, <UpdateFrame />];
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -66,9 +78,10 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-function SideBar() {
+function MainFrame() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [selectedMenuId, setSelectedMenuId] = React.useState(-1);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -76,6 +89,10 @@ function SideBar() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const selectMenu = (event, id) => {
+    setSelectedMenuId(id);
   };
 
   return (
@@ -92,8 +109,8 @@ function SideBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Hyuk Web
+          <Typography variant="h6" noWrap component="div" onClick={(e) => selectMenu(e, -1)}>
+            CJ OliveNetworks
           </Typography>
         </Toolbar>
       </AppBar>
@@ -111,15 +128,20 @@ function SideBar() {
         open={open}
       >
         <DrawerHeader>
+          <Typography variant="h6" noWrap component="div">
+            Hyuk Web
+          </Typography>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {menuList.map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                selected={selectedMenuId === index}
+                onClick={(e) => selectMenu(e, index)}>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
@@ -129,30 +151,14 @@ function SideBar() {
           ))}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
-        <Typography paragraph>
-          내용1
-        </Typography>
-        <Typography paragraph>
-          내용2
-        </Typography>
+        {menuComponentList[selectedMenuId]}
+        {(selectedMenuId === -1 ? <HomeFrame /> : null)}
       </Main>
     </Box>
   );
 }
 
-export default SideBar;
+export default MainFrame;
