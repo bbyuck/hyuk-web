@@ -31,7 +31,7 @@ import UpdateFrame from './ui/update/UpdateFrame';
 const drawerWidth = 240;
 
 const menuList = ['Create', 'Read', 'Update', 'Delete', 'Grid', 'File Upload', 'Thumbnail'];
-const menuComponentList = [<CreateFrame />, <DeleteFrame />, <ReadFrame />, <UpdateFrame />];
+const menuComponentList = [<CreateFrame />, <ReadFrame />, <UpdateFrame />, <DeleteFrame />];
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
