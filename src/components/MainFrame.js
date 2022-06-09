@@ -158,7 +158,8 @@ function MainFrame() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div" onClick={(e) => selectMenu(e, -1)}>
-            CJ OliveNetworks
+            {/* CJ OliveNetworks */}
+            <img src="img/logo/CJ_ONS_logo.svg" alt="CJ 올리브네트웍스" onClick={(e) => selectMenu(e, -1)} />
           </Typography>
         </Toolbar>
       </AppBar>
@@ -177,7 +178,7 @@ function MainFrame() {
       >
         <DrawerHeader>
           <Typography variant="h6" noWrap component="div">
-            Hyuk Web
+            bb Web
           </Typography>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
